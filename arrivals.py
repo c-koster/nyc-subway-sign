@@ -29,12 +29,13 @@ class Arrival:
 
 
 
-    def as_printable_dict(self, timestamp: datetime) -> Dict[str, Any]:
+    def as_printable_dict(self, now_ts: datetime) -> Dict[str, Any]:
+
 
         return {
             "line_name": self.line_name,
             "destination": id2names[self.destination_station_id],
-            "time_to_arrive": 2
+            "mins_to_arrive": (self.arrival_ts - now_ts).seconds // 60,
         }
 
     
@@ -46,7 +47,6 @@ class Station:
 
     station_id: str
     line_names: str # or char array
-    arrivals: List[Arrival]
 
 
     def get_name(self) -> str:
@@ -90,5 +90,4 @@ class Station:
                         for ts in feed[route][self.station_id]
                     ]
         
-        self.arrivals = arrivals 
         return sorted(arrivals)
