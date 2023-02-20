@@ -10,57 +10,70 @@ load_dotenv()
 
 API_KEY = os.getenv("MTA_API_KEY","")
 
-df = pd.read_csv("data/stops.txt")
+df = pd.read_csv("resources/stops.txt")
 df = df.set_index("stop_id")
 id2names = df["stop_name"].to_dict()
 del df
 
+line_ends = pd.read_csv("resources/line_ends.txt")
+line2end = {
+    l["linename"] : {"N":l["first"], "S":l["last"]} # type:ignore
+    for l in line_ends.to_dict(orient="records") 
+}
 
 @dataclass(frozen=True, order=True)
 class Arrival:
     # these are train ids that correspond with a station name and a direction
     station_id: str = field(compare=False)
-    destination_station_id: str = field(compare=False)
+    destination_station: str = field(compare=False)
 
     line_name: str = field(compare=False) # single character line name
 
     # when does the train arrive (dt object)
     arrival_ts: datetime = field(compare=True)
+    lowercase: bool = field(compare=False)
 
 
+    def get_destination_station_name(self) -> str:
+        
+        direction = self.line_name[-1]
+
+
+        
+        return self.destination_station.lower() if self.lowercase else self.destination_station.upper()
 
     def as_printable_dict(self, now_ts: datetime) -> Dict[str, Any]:
 
-
         return {
             "line_name": self.line_name,
-            "destination": id2names[self.destination_station_id],
+            "destination": self.get_destination_station_name(),
             "mins_to_arrive": (self.arrival_ts - now_ts).seconds // 60,
         }
 
     
 
-@dataclass()
+@dataclass
 class Station:
     # instatiate one of these objects with station_id and line names
     # and call it repeatedly.
 
     station_id: str
     line_names: str # or char array
+    lowercase: bool
 
 
     def get_name(self) -> str:
         return id2names[self.station_id]
     
 
-    def print_trains(self) -> List[Dict[str,Any]]:
+    def print_trains(self, k: int = 2) -> List[Dict[str,Any]]:
         """
-        Prints out next two trains to arrive. can add time-to-station logic here later.
+        Prints out next k (defaults to two) trains to arrive. can add time-to-station logic here later.
         """
 
         arrivals = self.get_arrivals()
         now = datetime.now().astimezone()
-        return [ a.as_printable_dict(now)  for a in arrivals[:2] ]
+        return [ a.as_printable_dict(now) for a in arrivals[:k] ]
 
 
     def get_arrivals(self) -> List[Arrival]:
@@ -83,9 +96,10 @@ class Station:
                     arrivals += [
                         Arrival(
                             station_id=self.station_id,
-                            destination_station_id="8 AV",
+                            destination_station = line2end[route][self.station_id[-1]],
                             line_name=route,
-                            arrival_ts = ts
+                            arrival_ts = ts,
+                            lowercase=self.lowercase
                         )
                         for ts in feed[route][self.station_id]
                     ]
