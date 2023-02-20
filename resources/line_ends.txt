@@ -1,0 +1,19 @@
+linename,first,last
+L,8 Av,Canarsie-Rockaway Pkwy
+1,Van Cortlandt Park-242 St,South Ferry
+2,Wakefield-241 St,New Lots Av
+3,Harlem-148 St,Flatbush Av-Brooklyn College
+4,Woodlawn,Crown Hts-Utica Av
+5,Eastchester-Dyre Av,Flatbush Av-Brooklyn College
+6,Pelham Bay Park,Brooklyn Bridge-City Hall
+A,Inwood-207 St,Ozone Park-Lefferts Blvd
+C,168 St-Washington Hts,Euclid Av
+E,World Trade Center,Jamaica Center-Parsons/Archer
+B,Bedford Park Blvd,Brighton Beach
+D,Norwood-205 St,Coney Island-Stillwell Av
+F,Jamaica-179 St,Coney Island-Stillwell Av
+M,Middle Village-Metropolitan Av,Broad St
+N,Astoria Ditmars Blvd,Coney Island-Stillwell Av
+Q,Canal St,96 St
+R,Astoria-Ditmars Blvd,Bay Ridge-95 St
+7,Flushing-Main St,34 St-Hudson Yards
