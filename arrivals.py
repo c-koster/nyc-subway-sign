@@ -91,7 +91,8 @@ class Station:
         # feed = SubwayFeed.get(line_names[0], api_key = API_KEY)
         for url in dedup_urls:
             feed = SubwayFeed.get(url).extract_stop_dict()
-            for route in feed:
+            for route, data in feed.items():
+                print(route)
                 if route in self.line_names:
                     arrivals += [
                         Arrival(
@@ -101,7 +102,7 @@ class Station:
                             arrival_ts = ts,
                             lowercase=self.lowercase
                         )
-                        for ts in feed[route][self.station_id]
+                        for ts in data[self.station_id]
                     ]
         
         return sorted(arrivals)

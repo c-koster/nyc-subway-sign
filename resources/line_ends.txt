@@ -15,5 +15,6 @@ F,Jamaica-179 St,Coney Island-Stillwell Av
 M,Middle Village-Metropolitan Av,Broad St
 N,Astoria Ditmars Blvd,Coney Island-Stillwell Av
 Q,Canal St,96 St
-R,Astoria-Ditmars Blvd,Bay Ridge-95 St
+R,Astoria-Ditmars,Bay Ridge
+W,Astoria-Ditmars,Whitehall St
 7,Flushing-Main St,34 St-Hudson Yards

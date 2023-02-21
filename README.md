@@ -14,3 +14,5 @@
 - https://github.com/maxxscholten/nyc-train-sign 
 - https://github.com/ty-porter/RGBMatrixEmulator/
 - https://www.raspberrypi.com/news/nyc-train-sign/
+- https://github.com/c-koster/tempo-mirror (private repo) contains example shell scripts for on/off switch and restart logic) 
+

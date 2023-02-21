@@ -24,11 +24,13 @@ Gray    = graphics.Color(140,153,166)
 Orange  = graphics.Color(245,114,0)
 Erase   = graphics.Color(0,0,0)
 Purple  = graphics.Color(169,3,252)
-
+Yellow  = graphics.Color(224,209,34)
 
 colormap = {
     "L": Gray,
-    "7": Purple
+    "7": Purple,
+    "R": Yellow, 
+    "W": Yellow,
     # "B": ,
     # "D":
     # "F":
@@ -84,16 +86,18 @@ def draw_trains(train_cursor) -> None:
 
     
     while True:
-        arriving_trains = train_cursor.print_trains()
+        arriving_trains = train_cursor.print_trains(4)
+        print(arriving_trains)
         A = arriving_trains[0] 
         B = arriving_trains[1]
+        # each arrival was converted to a dict with the following:
+        #   "line_name"
+        #   "destination"
+        #   "mins_to_arrive"
         print("redrawing canvas with:\n",A,"\n",B)
 
-
         canvas.Clear()
-        # "line_name"
-        # "destination"
-        # "mins_to_arrive"
+
 
         # draw the first train    
         drawTrainCircle(LPAD,3, A["line_name"])
