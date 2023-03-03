@@ -4,21 +4,28 @@ from datetime import datetime
 from underground import SubwayFeed, metadata
 from dotenv import load_dotenv
 import os
-import pandas as pd 
+# import pandas as pd 
 
 load_dotenv()
 
 API_KEY = os.getenv("MTA_API_KEY","")
 
-df = pd.read_csv("resources/stops.txt")
-df = df.set_index("stop_id")
-id2names = df["stop_name"].to_dict()
-del df
+# df = pd.read_csv("resources/stops.txt")
+# df = df.set_index("stop_id")
+# id2names = df["stop_name"].to_dict()
+# del df
 
-line_ends = pd.read_csv("resources/line_ends.txt")
+id2names = {
+    "L11":"Graham Av",
+    "L11N":"Graham Av",
+    "L11S":"Graham Av"
+}
+
+# line_ends = pd.read_csv("resources/line_ends.txt")
 line2end = {
-    l["linename"] : {"N":l["first"], "S":l["last"]} # type:ignore
-    for l in line_ends.to_dict(orient="records") 
+    "L" : {"N":"8 Av","S":"Canarsie-Rockaway Pkwy"}
+    # l["linename"] : {"N":l["first"], "S":l["last"]} # type:ignore
+    # for l in line_ends.to_dict(orient="records") 
 }
 
 @dataclass(frozen=True, order=True)
