@@ -85,7 +85,13 @@ class Station:
 
         arrivals = self.get_arrivals()
         now = datetime.now().astimezone()
-        return [ a.as_printable_dict(now) for a in arrivals[:k] ]
+
+        trains = []
+        for a in arrivals:
+            dict_arrival = a.as_printable_dict(now)
+            if dict_arrival["mins_to_arrive"] < 100:
+                trains.append(dict_arrival)
+        return trains[:k]
 
 
     def get_arrivals(self) -> List[Arrival]:
