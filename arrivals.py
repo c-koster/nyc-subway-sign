@@ -18,12 +18,17 @@ API_KEY = os.getenv("MTA_API_KEY","")
 id2names = {
     "L11":"Graham Av",
     "L11N":"Graham Av",
-    "L11S":"Graham Av"
+    "L11S":"Graham Av",
+    
+    "638N":"Spring St",
+    "638":"Spring St",
+    "638S":"Spring St"
 }
 
 # line_ends = pd.read_csv("resources/line_ends.txt")
 line2end = {
-    "L" : {"N":"8 Av","S":"Canarsie-Rockaway Pkwy"}
+    "L" : {"N":"8 Av","S":"Canarsie-Rockaway Pkwy"},
+    "6" : {"N":"Pelham Bay","S":"Bklyn Bridge"}
     # l["linename"] : {"N":l["first"], "S":l["last"]} # type:ignore
     # for l in line_ends.to_dict(orient="records") 
 }

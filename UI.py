@@ -28,12 +28,14 @@ Orange  = graphics.Color(245,114,0)
 Erase   = graphics.Color(0,0,0)
 Purple  = graphics.Color(169,3,252)
 Yellow  = graphics.Color(224,209,34)
+Green   = graphics.Color(45,140,24)
 
 colormap = {
     "L": Gray,
     "7": Purple,
     "R": Yellow, 
     "W": Yellow,
+    "6": Green,
     # "B": ,
     # "D":
     # "F":
