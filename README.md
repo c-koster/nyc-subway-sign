@@ -13,6 +13,7 @@ sudo apt-get install vim git tmux python3 python3-pip python3-dev python3-pillow
 git clone https://github.com/c-koster/nyc-subway-sign
 curl https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/main/rgb-matrix.sh > rgb-matrix.sh
 sudo bash rgb-matrix.sh
+python3 -m pip install -r nyc-subway-sign/requirements.txt
 ```
 
 
@@ -25,11 +26,12 @@ To turn on and off automatically, crontab needs the following entries (try `sudo
 # reboot to check for github changes
 ```
 
-Add the following lines as environment variables (try `vim ~/.bashrc`):
+Add the following lines as environment variables in the `.env` file:
 
 ```sh
-export STATION_TO_TRACK="L11N"
-export LINES_TO_TRACK="L"
+MTA_API_KEY="key-goes-here-XcQ"
+STATION_TO_TRACK="L11N"
+LINES_TO_TRACK="L"
 ```
 
 
