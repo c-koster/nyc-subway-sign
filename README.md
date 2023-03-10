@@ -1,20 +1,35 @@
+# NYC Subway sign (🗽🍎🚉)
 
 
-
+## Hardware Needed
 
 ## Pi Software Setup
 
+Once the pi is wired, run the commands below. For the rpi-matrix setup, select the Adafruit HAT configuration.
+
 ```sh
 sudo apt-get update
-sudo apt-get install git tmux python3 python3-pip python3-dev python3-pillow -y
+sudo apt-get install vim git tmux python3 python3-pip python3-dev python3-pillow -y
 git clone https://github.com/c-koster/nyc-subway-sign
+curl https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/main/rgb-matrix.sh > rgb-matrix.sh
+sudo bash rgb-matrix.sh
 ```
 
 
-Need to edit the Makefile (swap regular with adafruit-hat) and run these commands to set up the matrix controller:
+
+To turn on and off automatically, crontab needs the following entries (try `sudo crontab -e`):
+
 ```
-make build-python PYTHON=$(command -v python3)
-sudo make install-python PYTHON=$(command -v python3)
+0 8 * * *  sudo /home/pi/nyc-subway-sign/scripts/start.sh # START 8am every morning
+0 22 * * * sudo /home/pi/nyc-subway-sign/scripts/stop.sh  # STOP 10pm every evening
+# reboot to check for github changes
+```
+
+Add the following lines as environment variables (try `vim ~/.bashrc`):
+
+```sh
+export STATION_TO_TRACK="L11N"
+export LINES_TO_TRACK="L"
 ```
 
 
