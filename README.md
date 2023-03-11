@@ -10,10 +10,12 @@ Once the pi is wired, run the commands below. For the rpi-matrix setup, select t
 ```sh
 sudo apt-get update
 sudo apt-get install vim git tmux python3 python3-pip python3-dev python3-pillow -y
-git clone https://github.com/c-koster/nyc-subway-sign
 curl https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/main/rgb-matrix.sh > rgb-matrix.sh
 sudo bash rgb-matrix.sh
+cd /home/pi
+git clone https://github.com/c-koster/nyc-subway-sign
 python3 -m pip install -r nyc-subway-sign/requirements.txt
+chmod +x nyc-subway-sign/scripts/*
 ```
 
 
@@ -27,10 +29,14 @@ LINES_TO_TRACK="L"
 To turn on and off automatically, crontab needs the following entries (try `crontab -e`):
 
 ```
-0 8 * * *  sudo /home/pi/nyc-subway-sign/scripts/start.sh # START 8am every morning
-0 22 * * * sudo /home/pi/nyc-subway-sign/scripts/stop.sh  # STOP 10pm every evening
-# reboot to check for github changes
+# START 8am every morning
+0 8 * * *  /home/pi/nyc-subway-sign/scripts/start.sh 
+# STOP 10pm every evening
+0 22 * * * /home/pi/nyc-subway-sign/scripts/stop.sh 
+# should also reboot and check for github changes
 ```
+
+
 
 
 ## Notes & Errata
