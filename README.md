@@ -17,21 +17,19 @@ python3 -m pip install -r nyc-subway-sign/requirements.txt
 ```
 
 
+Add the following lines as environment variables in the `.env` file:
+```sh
+MTA_API_KEY="key-goes-here-XcQ"
+STATION_TO_TRACK="L11N"
+LINES_TO_TRACK="L"
+```
 
-To turn on and off automatically, crontab needs the following entries (try `sudo crontab -e`):
+To turn on and off automatically, crontab needs the following entries (try `crontab -e`):
 
 ```
 0 8 * * *  sudo /home/pi/nyc-subway-sign/scripts/start.sh # START 8am every morning
 0 22 * * * sudo /home/pi/nyc-subway-sign/scripts/stop.sh  # STOP 10pm every evening
 # reboot to check for github changes
-```
-
-Add the following lines as environment variables in the `.env` file:
-
-```sh
-MTA_API_KEY="key-goes-here-XcQ"
-STATION_TO_TRACK="L11N"
-LINES_TO_TRACK="L"
 ```
 
 
