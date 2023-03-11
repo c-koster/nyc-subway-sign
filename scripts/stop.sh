@@ -5,9 +5,8 @@ cd /home/pi/nyc-subway-sign
 
 # Check to see whether the script is already running
 if [ "$(screen -ls | grep -i 'trainsign')" ]; then
-  # screen -r trainsign 
+  screen -S trainsign -X stuff $'\003' # send the "trainsign" screen session CTRL-C
   echo "Turning off the sign by stopping the screen session."
-  sudo reboot # TODO find a way to re-attach to the screen session (or just kill it)
 else
   echo "No running script was found."
 fi
