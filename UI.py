@@ -80,15 +80,7 @@ def drawMinsLeft(x: int, y: int, minutes: int) -> None:
 
 
 def draw_trains(train_cursor) -> None:
-    """
-    redraw the sign every thiry seconds.
-
-    if we get 2 trains, print both
-    if we get 1, print only the first   
-    if there are 
-    """
-
-
+    
     assert hasattr(train_cursor,"print_trains")
     global canvas
 
