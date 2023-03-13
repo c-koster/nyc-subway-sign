@@ -80,6 +80,13 @@ def drawMinsLeft(x: int, y: int, minutes: int) -> None:
 
 
 def draw_trains(train_cursor) -> None:
+    """
+    redraw the sign every thiry seconds.
+
+    if we get 2 trains, print both
+    if we get 1, print only the first   
+    if there are 
+    """
 
 
     assert hasattr(train_cursor,"print_trains")
@@ -92,28 +99,34 @@ def draw_trains(train_cursor) -> None:
     
     while True:
         arriving_trains = train_cursor.print_trains(4)
+
+
+        # print("redrawing canvas with:\n",A,"\n",B)
         print(arriving_trains)
-        A = arriving_trains[0] 
-        B = arriving_trains[1]
+
+        canvas.Clear()
+
         # each arrival was converted to a dict with the following:
         #   "line_name"
         #   "destination"
         #   "mins_to_arrive"
-        print("redrawing canvas with:\n",A,"\n",B)
-
-        canvas.Clear()
+        
 
 
-        # draw the first train    
-        drawTrainCircle(LPAD,3, A["line_name"])
-        drawRunningText(LPAD + 12,COL_1 + font.height - 1, A["destination"])
-        drawMinsLeft(canvas.width - 30, COL_1 +font.height - 1, minutes=A["mins_to_arrive"])
+        if len(arriving_trains) > 0:
+            # draw the first train    
+            A = arriving_trains[0] 
+            drawTrainCircle(LPAD,3, A["line_name"])
+            drawRunningText(LPAD + 12,COL_1 + font.height - 1, A["destination"])
+            drawMinsLeft(canvas.width - 30, COL_1 +font.height - 1, minutes=A["mins_to_arrive"])
 
-
-        # and the second
-        drawTrainCircle(LPAD,COL_2,B["line_name"]) 
-        drawRunningText(LPAD + 12,COL_2 + font.height - 1, B["destination"])
-        drawMinsLeft(canvas.width - 30, COL_2 + font.height - 1, minutes=B["mins_to_arrive"])
+        
+        if len(arriving_trains) > 1:
+            # and the second
+            B = arriving_trains[1]
+            drawTrainCircle(LPAD,COL_2,B["line_name"]) 
+            drawRunningText(LPAD + 12,COL_2 + font.height - 1, B["destination"])
+            drawMinsLeft(canvas.width - 30, COL_2 + font.height - 1, minutes=B["mins_to_arrive"])
         
 
         # redraw canvas
