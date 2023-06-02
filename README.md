@@ -25,10 +25,12 @@ Once the pi is wired, run the commands below. For the rpi-matrix setup, select t
 ```sh
 sudo apt-get update
 sudo apt-get install vim git tmux python3 python3-pip python3-dev python3-pillow -y
-git clone https://github.com/c-koster/nyc-subway-sign
 curl https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/main/rgb-matrix.sh > rgb-matrix.sh
 sudo bash rgb-matrix.sh
+cd /home/pi
+git clone https://github.com/c-koster/nyc-subway-sign
 python3 -m pip install -r nyc-subway-sign/requirements.txt
+chmod +x nyc-subway-sign/scripts/*
 ```
 
 
@@ -42,16 +44,16 @@ LINES_TO_TRACK="L"
 To turn on and off automatically, crontab needs the following entries (try `crontab -e`):
 
 ```
-0 8 * * *  sudo /home/pi/nyc-subway-sign/scripts/start.sh # START 8am every morning
-0 22 * * * sudo /home/pi/nyc-subway-sign/scripts/stop.sh  # STOP 10pm every evening
-# reboot to check for github changes
+# START 8am every morning
+0 8 * * *  /home/pi/nyc-subway-sign/scripts/start.sh 
+# STOP 10pm every evening
+0 22 * * * /home/pi/nyc-subway-sign/scripts/stop.sh 
+# should also reboot and check for github changes
 ```
-
 
 ### Notes & Errata
 
 - The MTA train signs list each train's final destination next to the line-name. This destination will change on the sign if there is track maintinence (e.g. if the L train has track maintinence between Union Square and 8th ave, the sign should say `14 St-Union Sq`). However I was not able to find an online resource which could give me this information dynamically so I went with uptown/downtown station names exracted from [stops.txt](./resources/stops.txt). The labels for these first and last stations can be found in [line_ends.txt](./resources/line_ends.txt).
-
 - Technically each panel could draw up to 4A if all the LEDs were set to full white at the same time (8A total). In this project, many of the LEDs are switched off so a 4A supply is fine. 
 
 ### Resources
